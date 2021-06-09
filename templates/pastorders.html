@@ -1,0 +1,16 @@
+{% include "header.html" %}
+        {% if ordercount > 0 %}
+        <h1> Past Orders </h1>
+          {% for order in orderlist %}
+          <p> Order number {{ order["_id"] }} <br> Order date {{ order["orderdate"] }}</p>
+          <table class = "table">
+            <tr><th>Product</th><th>Qty</th><th>Price</th><th>Subtotal</th></tr>
+            {% for item in order["details"] %}
+                      <tr><td>{{ item["name"] }}</td><td>{{ item["qty"] }}</td><td>{{ item["subtotal"]/item["qty"] }}</td><td>{{ item["subtotal"] }}</td></tr>
+            {% endfor %}
+          </table>
+          {% endfor %}
+        {% else %}
+          <p>No orders have been made yet.</p>
+        {% endif %}
+{% include "footer.html" %}
